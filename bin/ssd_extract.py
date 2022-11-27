@@ -291,12 +291,14 @@ def main(options):
                             # not guaranteed)
                             for num,text in decoded:
                                 wrap_width=64 if wrap else 65536
-                                wrapped=textwrap.wrap(wrap_width)
+                                wrapped=textwrap.wrap(text,wrap_width)
                                 num_text="%5d "%num
                                 for i in range(len(wrapped)):
                                     if i==0: prefix=num_text
                                     else: prefix=" "*len(num_text)
-                                    print>>f,"%s%s"%(prefix,wrapped[i])
+                                    #print(bytes("%s%s"%(prefix,wrapped[i]), 'utf-8'), end="", file=f)
+                                    f.write(bytes("%s%s"%(prefix,wrapped[i]), 'utf-8'))
+                                    #print>>f,"%s%s"%(prefix,wrapped[i])
 
 ##########################################################################
 ##########################################################################
